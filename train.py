@@ -18,7 +18,9 @@ def main():
     args = p.parse_args()
 
     tok = AutoTokenizer.from_pretrained(BASE)
-    tok.pad_token = tok.eos_token
+    # pad with unk, NOT eos: with pad == eos the collator masks every EOS in the labels,
+    # so the model never learns to stop talking
+    tok.pad_token = tok.unk_token
     tok.padding_side = "right"
 
     bnb = BitsAndBytesConfig(
