@@ -9,4 +9,4 @@ venv/
 data/
 checkpoints/
 wandb/
-*.log
+merged/
